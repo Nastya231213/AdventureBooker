@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Main')
 @section('content')
-<div class=" bg-image" style="background-image: url('{{ asset('images/accommodation.jpg') }}');">
+<div class=" bg-image" style="background-image: url('{{ asset('images/hotel.webp') }}');">
     <div id="search-accommodation">
         <div class="booking-section">
             <div>
@@ -76,7 +76,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-5 mt-2 ">
                         <div class="card">
                             <img src="{{ asset('images/apartment.jpg') }}" class="card-img-top" alt="Apartment">
                             <div class="card-body">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4  col-sm-5 mt-2">
                         <div class="card">
                             <img src="{{ asset('images/hostel.jpg') }}" class="card-img-top" alt="Hostel">
                             <div class="card-body">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4  col-sm-5 mt-2">
                         <div class="card">
                             <img src="{{ asset('images/villa.webp') }}" class="card-img-top" alt="Villa">
                             <div class="card-body">
@@ -141,7 +141,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4  col-sm-5 mt-2">
                                 <div class="card shadow">
                                     <img src="{{ asset('images/hotelKyiv1.jpg') }}" class="card-img-top" alt="Kyiv Hotel 1">
                                     <div class="card-body">
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4  col-sm-5 mt-2">
                                 <div class="card shadow">
                                     <img src="{{ asset('images/hotelKyiv2.jfif') }}" class="card-img-top" alt="Kyiv Hotel 2">
                                     <div class="card-body">
@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4  col-sm-5 mt-2">
                                 <div class="card shadow">
                                     <img src="{{ asset('images/hotelKyiv3.jpeg') }}" class="card-img-top" alt="Kyiv Hotel 3">
                                     <div class="card-body">
@@ -285,20 +285,111 @@
     </div>
 
 
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#accommodationTypeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+
+    <h3 class="mt-5">Guest Reviews</h3>
+    <div id="accommodationTypeCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card ">
+
+                            <div class="card-body review">
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <img src="{{asset('images/default.jpg')}}" alt="">
+                                <h5 class="mt-2">Fullname</h5>
+                                <span class="date">3 months ago</span>
+                                <p class="text-center">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed ligula augue, tristique eu volutpat vitae
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card ">
+
+                            <div class="card-body review">
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <img src="{{asset('images/default.jpg')}}" alt="">
+                                <h5 class="mt-2">Fullname</h5>
+                                <span class="date">3 months ago</span>
+                                <p class="text-center">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed ligula augue, tristique eu volutpat vitae
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card ">
+                            <div class="card-body review">
+                                <div class="rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <img src="{{asset('images/default.jpg')}}" alt="">
+                                <h5 class="mt-2">Fullname</h5>
+                                <span class="date">3 months ago</span>
+                                <p class="text-center">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed ligula augue, tristique eu volutpat vitae
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_facts">
+        <div class="fact">
+
+            <img src="{{asset('images/discount.png')}}">
+
+            <h4>Great hotel deals </h4>
+            <p>
+                We search for deals from the best hotels around the world and share these finds with you.</p>
+        </div>
+        <div class="fact">
+            <img src="{{asset('images/hotel_bell.png')}}">
+            <h4>Up-to-date pricing
+            </h4>
+            <p>We always show you the most recent pricing overview we can find, so you know exactly what to expect.
+            </p>
+        </div>
+        <div class="fact">
+            <img src="{{asset('images/time.png')}}">
+            <h4>Precise searching
+            </h4>
+            <p>Find hotels with swimming pools, free cancellation, and flexible booking.
+                Or whatever matters most to you. </p>
         </div>
     </div>
 
-</div>
-<script>
-    function updateDropdown() {
-        const adults = document.getElementById('adults').value;
-        const children = document.getElementById('children').value;
-        const rooms = document.getElementById('rooms').value;
+    <script>
+        function updateDropdown() {
+            const adults = document.getElementById('adults').value;
+            const children = document.getElementById('children').value;
+            const rooms = document.getElementById('rooms').value;
 
-        const dropdownInput = document.getElementById('dropdownMenuButton');
-        dropdownInput.value = `${adults} Adult(s), ${children} Child(ren), ${rooms} Room(s)`;
-    }
-</script>
-@endsection
+            const dropdownInput = document.getElementById('dropdownMenuButton');
+            dropdownInput.value = `${adults} Adult(s), ${children} Child(ren), ${rooms} Room(s)`;
+        }
+    </script>
+    @endsection
