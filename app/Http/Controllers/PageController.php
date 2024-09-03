@@ -11,4 +11,8 @@ class PageController extends Controller
 
         return view('accommodation');
     }
+    public function registrationSuccess(){
+
+        return view('registrationSuccess');
+    }
 }
