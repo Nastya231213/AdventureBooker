@@ -16,46 +16,62 @@
                     <a class="nav-link" href="#">Tours</a>
                 </li>
 
+                @guest
                 <li class="nav-item d-flex  align-items-center">
                     <i class="bi bi-person-badge"></i>
                     <a class="nav-link " data-bs-toggle="modal" data-bs-target="#registrationModal" href="#">Registration</a>
                 </li>
                 <li class="nav-item d-flex align-items-center">
-                    <i class="bi bi-box-arrow-in-left"></i>
+                    <i class="bi bi-door-open"></i>
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
                 </li>
+                @else
+                <li class="nav-item d-flex align-items-center">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    <a class="nav-link" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @endguest
             </ul>
         </div>
     </div>
 </nav>
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content  " id="loginModalContent">
+    <div class="modal-dialog">
+        <div class="modal-content" id="loginModalContent">
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <h4>Login</h4>
-                <form>
+                <form id="loginForm">
+                    @csrf
+
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="Enter your email" required>
                     </div>
                     <div class="mb-1">
                         <label for="loginPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" placeholder="Enter your password">
+                        <input type="password" name="loginPassword" class="form-control" id="loginPassword" placeholder="Enter your password" required>
                     </div>
-                    <a href="#" id="forget_password">Forget password?</a>
+                    <a href="#" id="forget_password">Forgot password?</a>
 
-                    <div class="d-flex justify-content-cente mt-1">
-                        <button type="submit" id="loginBtn" class="">Login</button>
+                    <div class="d-flex justify-content-center mt-1">
+                        <button type="submit" id="loginBtn" class="btn btn-primary w-100">Login</button>
                     </div>
                 </form>
-
+                <div id="loginError" class="mt-3 text-danger" style="display: none;">Invalid login credentials.</div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content" id="registrationModalContent">
@@ -103,7 +119,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm password</label>
-                        <input type="password" class="form-control" name="oassword_confirmation" id="confirmPassword" placeholder="Confirm your password">
+                        <input type="password" class="form-control" name="password_confirmation" id="confirmPassword" placeholder="Confirm your password">
                     </div>
 
                     <div class="d-flex justify-content-center">
@@ -131,16 +147,20 @@
                 }
             });
             if (response.ok) {
-                
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = data.redirect_url;
+                }
 
             } else if (response.status === 422) {
                 const errorsData = await response.json();
                 const errors = errorsData.errors;
                 clearErrors();
-                for(let field in errors){
-                    if(errors.hasOwnProperty(field)){
-                        const errorMessages=errors[field];
-                        showAlert(field,errorMessages[0]);
+                for (let field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                        const errorMessages = errors[field];
+                        showAlert(field, errorMessages[0]);
                     }
                 }
 
@@ -148,21 +168,52 @@
                 console.error('Registration failed:', response.statusText);
             }
 
-        } catch (error) {
-        }
+        } catch (error) {}
+
         function clearErrors() {
             const alertElements = document.querySelectorAll('.alert-danger');
             alertElements.forEach(
                 alert => {
                     alert.classList.add('d-none');
-                    alert.textContent='';
+                    alert.textContent = '';
                 }
             );
         }
-        function showAlert(field,message){
-            const alertElement=document.querySelector(`[name="${field}"]`).nextElementSibling;
+
+
+        function showAlert(field, message) {
+            const alertElement = document.querySelector(`[name="${field}"]`).nextElementSibling;
             alertElement.classList.remove('d-none');
-            alertElement.textContent=message;
+            alertElement.textContent = message;
         }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const loginError = document.getElementById('loginError');
+        loginError.style.display = 'none';
+        fetch('/login', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+
+            }
+        }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    window.location.href = '/';
+                } else {
+                    loginError.style.display = 'block';
+                    loginError.innerText = data.message || 'Invalid login credentials.';
+
+                }
+            }
+
+        ).catch(error => {
+            console.error('Error:', error);
+        });
     });
 </script>
