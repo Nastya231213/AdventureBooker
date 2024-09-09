@@ -57,9 +57,9 @@ class AuthenticationController extends Controller
             'message' => 'Invalid credentials. Please try again.'
         ], 401);
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/')->with('successMessage', 'You have been logged out successfully.');
-
     }
 }

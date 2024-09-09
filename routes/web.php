@@ -21,7 +21,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('index');
-        Route::delete('{user_id}',[UserController::class,'delete'])->name('delete');
-
+        Route::delete('{user_id}', [UserController::class, 'delete'])->name('delete');
+        Route::get('create', [UserController::class, 'create'])->name('create');
     });
 });
+Route::post('admin/users/store', [UserController::class, 'store'])->name('admin.users.store');

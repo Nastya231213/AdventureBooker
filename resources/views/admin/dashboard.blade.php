@@ -1,6 +1,7 @@
 @extends('layouts.admin.admin_main')
 @section('title', 'Dashboard')
 @section('content')
+
 <div class="main-content" id="mainContent">
     <h1 class="mb-4">Dashboard</h1>
     <div class="row">

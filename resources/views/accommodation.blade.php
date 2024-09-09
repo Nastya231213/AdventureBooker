@@ -2,14 +2,7 @@
 @section('title','Main')
 @section('content')
 
-@if(session('successMessage'))
-<div class="message show">
-    <span class="fas fa-check-circle"></span>
-    <span class="text">{{ session('successMessage') }}</span>
-
-    <span class="close-btn"><span class="fas fa-times"></span></span>
-</div>
-@endif
+@include('flash-message')
 <div class=" bg-image" style="background-image: url('{{ asset('images/hotel.webp') }}');">
     <div id="search-accommodation">
         <div class="booking-section">
@@ -31,6 +24,7 @@
                 <input type="date" id="end-date" name="end-date" class="form-control  " placeholder="End Date">
             </div>
             <div>
+
                 <p>Rooms and guests</p>
 
                 <div class="dropdown w-100">

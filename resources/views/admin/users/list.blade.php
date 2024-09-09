@@ -7,7 +7,7 @@
     <div class="container">
         <h4 class="my-4 text-center">User Management Dashboard</h4>
         <div class="mb-3 text-end">
-            <a href="#" class="btn btn-success">
+            <a href="{{route('admin.users.create')}}" class="btn btn-success">
                 <i class="bi bi-plus-circle"></i> Add New User
             </a>
         </div>
@@ -22,7 +22,8 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Full name</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Profile photo</th>
                         <th scope="col">Status</th>
@@ -35,11 +36,12 @@
                     <tr>
 
                         <th scope="row">{{$key+1}}</th>
-                        <td>{{$user->full_name}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->surname}}</td>
                         <td>{{$user->email}}</td>
                         <td>
                             @if(isset($user->profile_photo))
-                            <img src="{{asset('storage/'.$user->profile_photo) }}" alt="Profile photo">
+                            <img src="{{asset('storage/profile_photos/'.$user->profile_photo) }}" alt="Profile photo">
                             @else
                             None
                             @endif
@@ -50,10 +52,9 @@
                             User
                             @endif
                         </td>
-
                         <td class="text-center align-middle">
-                            <a href="#" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
-                            <a href="#" class="btn btn-danger delete-button" data-id="{{ $user->id }}"> <i class="bi bi-x-circle-fill"></i> Delete </a>
+                            <a href="#" class="btn btn-primary mt-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a href="#" class="btn btn-danger delete-button mt-1" data-id="{{ $user->id }}"> <i class="bi bi-x-circle-fill"></i> Delete </a>
 
                         </td>
                     </tr>
@@ -89,7 +90,6 @@
                 if (response.ok) {
                     alert('User deleted successfully');
                     this.closest('tr').remove();
-                    і
                 } else {
                     alert('Failed to delete the user.');
                 }

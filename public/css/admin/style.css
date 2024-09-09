@@ -213,12 +213,13 @@
     margin: auto;
 }
 
-.container_post h1,.content_of_post h1 {
+.container_post h1,
+.content_of_post h1 {
     font-family: "Playfair Display", serif !important;
-    font-weight:700;
+    font-weight: 700;
 
 
-    
+
 }
 
 .container_post p {
@@ -232,8 +233,18 @@
 }
 
 
-.table-responsive img{
-    width:100px;
-    height:100px;
+.table-responsive img {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
+}
+
+
+.error-message {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgb(238, 12, 12);
+    font-style: italic;
+    font-weight: 500;
 }
