@@ -1,5 +1,5 @@
 @extends('layouts.admin.admin_main')
-@section('title', 'Add User')
+@section('title', 'Edit User')
 @section('content')
 <div id="successMessage" class="message hide">
     <span class="fas fa-check-circle"></span>
@@ -12,14 +12,17 @@
         <i class="bi bi-arrow-left"></i> All Users
     </a>
 
-    <form id="add-user-form"  enctype="multipart/form-data" class="mx-auto border rounded p-4 user-form">
+    <form id="edit-user-form" enctype="multipart/form-data" class="mx-auto border rounded p-4 user-form">
         @csrf
-        <h3 class="my-4 text-center">Add User</h3>
+        @method('PUT')
+        <input type="hidden" id="user-id" name="user_id" value="{{ $user->id }}">
+
+        <h3 class="my-4 text-center">Edit User</h3>
 
         <div class="row mb-3">
             <label for="name" class="col-3 col-form-label">Name</label>
             <div class="col-sm-12 col-lg-9">
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" value="{{$user->name}}" id="name" name="name">
                 <div class="error-message" id="error-name">
                 </div>
             </div>
@@ -27,7 +30,7 @@
         <div class="row mb-3">
             <label for="name" class="col-3 col-form-label">Surname</label>
             <div class="col-md-12 col-lg-9">
-                <input type="text" class="form-control" id="surname" name="surname">
+                <input type="text" class="form-control" value="{{$user->surname}}" id="surname" name="surname">
                 <div class="error-message" id="error-surname">
                 </div>
             </div>
@@ -36,7 +39,7 @@
         <div class="row mb-3">
             <label for="email" class="col-3  col-form-label">Email</label>
             <div class=" col-12 col-lg-9">
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" value="{{$user->email}}" id="email" name="email">
                 <div class="error-message" id="error-email">
                 </div>
             </div>
@@ -45,22 +48,21 @@
         <div class="row mb-3">
             <label for="phone_number" class="col-sm-3 col-form-label">Phone number</label>
             <div class="col-12 col-lg-9">
-                <input type="text" class="form-control" id="phone_number" name="phone_number">
+                <input type="text" class="form-control" value="{{$user->phone_number}}" id="phone_number" name="phone_number">
                 <div class="error-message" id="error-phone_number">
                 </div>
             </div>
         </div>
 
         <div class="row mb-3">
-            <label for="password" class="col-sm-3 col-form-label">Password</label>
+            <label for="password" class="col-sm-3 col-form-label">New Password</label>
             <div class="col-md-12 col-lg-9">
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="new_password">
                 <div class="error-message" id="error-password">
                 </div>
             </div>
 
         </div>
-
         <div class="row mb-3">
             <label for="password" class="col-sm-3 col-form-label">Confirm password</label>
             <div class="col-md-12 col-lg-9">
@@ -70,35 +72,32 @@
             </div>
 
         </div>
-
         <div class="row mb-3">
             <label for="is_admin" class="col-sm-2 col-form-label">Admin</label>
-            <div class="col-md-12 col-lg-10">
-                <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
+            <div class="col-sm-12 col-lg-10">
+                <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin" {{ $user->is_admin ? 'checked' : '' }}>
                 <label class="form-check-label fs-6 fs-md-5" for="is_admin">Check if the user should be an admin</label>
-                <div class="error-message">
-                </div>
+                <div class="error-message"></div>
             </div>
         </div>
-
         <div class="row mb-3">
             <label for="profile_photo" class="col-sm-2 col-form-label">Profile Photo</label>
             <div class=" col-sm-10">
                 <input type="file" class="form-control mt-3" id="photo" name="photo" data-image-type="profile" accept="image/*">
                 <div class="mt-2">
-                    <img id="photo_preview" src="" width="150" alt="Image preview" style="display:none;">
+                    <img id="photo_preview" src="{{ isset($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" width="150" alt="Image preview" style="{{ isset($user->profile_photo) ? '' : 'display:none;' }}">
+
                 </div>
                 <div class="error-message" id="error-photo">
                 </div>
             </div>
 
         </div>
-
         <div id="data-container" data-url=""></div>
 
         <div class="row mb-3">
             <div class="mx-auto col-sm-6">
-                <button type="submit" id="add-user-button" class="btn btn-primary w-100">Add User</button>
+                <button type="submit" id="add-user-button" class="btn btn-primary w-100">Edit User</button>
             </div>
         </div>
     </form>
@@ -121,50 +120,52 @@
     </div>
 </div>
 <script src="{{asset('js/admin/cropper.js')}}"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const updateForm = document.getElementById('edit-user-form');
         document.querySelector('.message .close-btn').addEventListener('click', function() {
             const messageBox = document.querySelector('.message');
             messageBox.classList.add('hide');
         });
 
-        document.getElementById('add-user-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            clearErrors();
-            var url = '/admin/users/store';
-            fetch(url, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            }).then(response => {
-                if (response.status === 422) {
-                    return response.json().then(errorData => {
-                        if (errorData.errors) {
-                            $allErrorDiv = document.querySelectorAll('.error-message');
-                            displayValidationErrors(errorData.errors);
-                        }
-                    });
-                } else {
+        updateForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone_number: document.getElementById('phone_number').value,
+                surname: document.getElementById('surname').value,
+                password: document.getElementById('password').value,
+                _method: 'PUT'
+            };
+
+
+            fetch('/admin/users/{{ $user->id }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
                     return response.json();
-                }
-            }).then(data => {
-                if (data && data.success) {
-                    document.getElementById('add-user-form').reset();
+                })
+                .then(data => {
                     const successMessageDiv = document.getElementById('successMessage');
                     const textElement = successMessageDiv.querySelector('.text');
-                    document.querySelector('#successMessage .text').textContent = 'The user was added successfully';
+                    document.querySelector('#successMessage .text').textContent = 'The user was updated successfully';
                     successMessageDiv.classList.remove('hide');
                     successMessageDiv.classList.add('show');
-
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert(error.message);
-            });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
 
         function clearErrors() {
@@ -184,5 +185,4 @@
         }
     });
 </script>
-
 @endsection

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -29,6 +30,40 @@ class UserController extends Controller
     {
 
         return view('admin.users.create');
+    }
+    public function update(Request $request, User $user)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_number' => 'required|string|max:20',
+            'surname' => 'required|string|max:255',
+            'password' => 'nullable|min:6|confirmed',  
+        ]);
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('profile_photos', 'public');
+            $profile_photo = basename($photoPath);
+            if ($user->profile_photo && Storage::disk('public')->exists('profile_photo/' . $user->profile_photo)) {
+                Storage::disk('public')->delete('profile_photos/' . $user->profile_photo);
+            }
+            $user->profile_photo = $profile_photo;
+        }
+
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->surname = $request->input('surname');
+        $password = $request->input('password');
+        if ($password) {
+
+            $user->password = Hash::make($password);
+        }
+        $user->save();
+        return response()->json(['success' => true, 'message' => 'User updated successfully.']);
+
     }
     public function store(Request $request)
     {
@@ -59,7 +94,7 @@ class UserController extends Controller
             ]);
 
             return response()->json([
-                'success'=>true,
+                'success' => true,
                 'message' => 'User created successfully',
             ], 201);
         } catch (\Exception $e) {

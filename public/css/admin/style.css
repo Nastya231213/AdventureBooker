@@ -179,13 +179,13 @@
 
 @media (max-width: 768px) {
 
-    #add-user-form {
+    .user-form {
         width: 50vw;
     }
 }
 
 @media (min-width: 768px) {
-    #add-user-form {
+    .user-form {
         width: 40vw;
     }
 }

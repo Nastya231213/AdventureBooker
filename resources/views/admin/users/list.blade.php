@@ -34,7 +34,6 @@
                 <tbody>
                     @foreach($users as $key=>$user)
                     <tr>
-
                         <th scope="row">{{$key+1}}</th>
                         <td>{{$user->name}}</td>
                         <td>{{$user->surname}}</td>
@@ -53,9 +52,8 @@
                             @endif
                         </td>
                         <td class="text-center align-middle">
-                            <a href="#" class="btn btn-primary mt-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-primary mt-1"><i class="bi bi-pencil-square"></i> Edit</a>
                             <a href="#" class="btn btn-danger delete-button mt-1" data-id="{{ $user->id }}"> <i class="bi bi-x-circle-fill"></i> Delete </a>
-
                         </td>
                     </tr>
                     @endforeach
@@ -97,6 +95,22 @@
                 console.error('Error:', error);
             });
         });
+
+        function clearErrors() {
+            var allErrorDiv = document.querySelectorAll('.error-message');
+            allErrorDiv.forEach(element => {
+                element.textContent = '';
+            });
+        }
+
+        function displayValidationErrors(errors) {
+            for (let field in errors) {
+                let errorDiv = document.getElementById(`error-${field}`);
+                if (errorDiv) {
+                    errorDiv.textContent = errors[field][0];
+                }
+            }
+        }
     });
 </script>
 @endsection

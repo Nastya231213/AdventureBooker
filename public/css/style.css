@@ -363,30 +363,3 @@ footer .company-info {
     color: rgb(167, 167, 167);
 }
 
-.modal-body .alert {
-    font-size: 12px;
-    padding: 5px;
-}
-@keyframes show_slide {
-    0% {
-        transform: translateX(100%);
-    }
-
-    40% {
-        transform: translateX(-10%);
-    }
-
-    80% {
-        transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(-10px);
-    }
-}
-
-.close-btn .fa-times {
-    color: rgb(2, 72, 2);
-    font-size: 22px;
-    line-height: 40px;
-}
