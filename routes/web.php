@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PageController;
@@ -23,9 +24,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('index');
         Route::delete('{user_id}', [UserController::class, 'delete'])->name('delete');
         Route::get('create', [UserController::class, 'create'])->name('create');
-        Route::get('edit/{user_id}',[AdminPageController::class,'editUser'])->name('edit');
-
+        Route::get('edit/{user_id}', [AdminPageController::class, 'editUser'])->name('edit');
     });
-});Route::put('admin/users/{user}', [UserController::class, 'update'])->name('update');
+    Route::prefix('accommodation')->name('accommodation.')->group(
+        function () {
+            Route::get('', [AdminPageController::class, 'accommodation'])->name('index');
+            Route::get('create', [AdminPageController::class, 'createAccommodation'])->name('create');
+            Route::post('store', [AccommodationController::class, 'store'])->name('store');
+            Route::get('{accommodation}',[AdminPageController::class,'showAccommodation'])->name('show');
+        }
+    );
+});
+Route::put('admin/users/{user}', [UserController::class, 'update'])->name('update');
 
 Route::post('admin/users/store', [UserController::class, 'store'])->name('admin.users.store');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AccommodationType;
 use App\Http\Controllers\Controller;
+use App\Models\Accommodation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,22 @@ class AdminPageController extends Controller
     {
 
         $user = User::find($user_id);
-        return view('admin.users.edit',['user'=>$user]);
+        return view('admin.users.edit', ['user' => $user]);
+    }
+    public function createAccommodation()
+    {
+        $accommodationTypes = AccommodationType::cases();
+
+        return view('admin.accommodation.create', compact('accommodationTypes'));
+    }
+    public function accommodation(){
+        $accommodation = Accommodation::paginate(6);
+        return view('admin.accommodation.index',['accommodation'=>$accommodation]);
+    }
+    public function showAccommodation(Accommodation $accommodation){
+
+        $accommodation->load('photos');
+
+        return view('admin.accommodation.show',compact('accommodation'));
     }
 }

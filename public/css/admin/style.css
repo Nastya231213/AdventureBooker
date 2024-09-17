@@ -18,6 +18,16 @@
     transition: transform 0.3s ease, width 0.3s ease;
 }
 
+#gallery {
+    width: 100%
+}
+
+#gallery img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
 .main-content {
     margin-left: 20vw;
     margin-top: 19vh;
@@ -247,4 +257,106 @@
     color: rgb(238, 12, 12);
     font-style: italic;
     font-weight: 500;
+}
+
+#container_hotel {
+    padding: 20px;
+    max-wid700px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    #container_hotel {
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    і #container_hotel {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+}
+
+.card .btn-primary {
+    background-color: rgb(16, 16, 138);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.more_photos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+
+}
+
+.card_review {
+    height: 250px;
+    border: 1px solid rgb(179, 179, 179);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.guest_rating {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.guest_rating .quantity_reviews {
+    color: rgb(158, 156, 156);
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+.value {
+    background-color: rgb(3, 3, 138);
+    padding: 10px 8px;
+    height: 40px;
+    color: #fff;
+    font-size: 18px;
+    ;
+    margin-left: 10px;
+    border-radius: 5px;
+
+}
+.description{
+    font-size:20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 30px;
+    height: 30px;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+}
+.review-text {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-left: 40px; 
+    margin-right: 40px; 
+}
+
+.address{
+    font-size: 23px;
+}
+.address .bi{
+    color:rgb(2, 2, 180);
 }

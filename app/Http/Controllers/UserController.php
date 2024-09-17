@@ -39,7 +39,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'phone_number' => 'required|string|max:20',
             'surname' => 'required|string|max:255',
-            'password' => 'nullable|min:6|confirmed',  
+            'password' => 'nullable|min:6|confirmed',
         ]);
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
@@ -63,17 +63,9 @@ class UserController extends Controller
         }
         $user->save();
         return response()->json(['success' => true, 'message' => 'User updated successfully.']);
-
     }
     public function store(Request $request)
     {
-        $profile_photo = null;
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoPath = $photo->store('profile_photos', 'public');
-            $profile_photo = basename($photoPath);
-        }
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
@@ -81,6 +73,12 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'phone_number' => 'required|numeric',
         ]);
+        $profile_photo = null;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('profile_photos', 'public');
+            $profile_photo = basename($photoPath);
+        }
 
         try {
             $user = User::create([
