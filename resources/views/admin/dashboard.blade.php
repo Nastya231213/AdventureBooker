@@ -18,7 +18,7 @@
 
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Hotels <i class="bi bi-building"></i></h5>
+                    <h5 class="card-title">Accommodation <i class="bi bi-building"></i></h5>
                     <p class="card-text">Total hotels:</p>
                     <a href="#" class="btn btn-primary">Manage Hotels</a>
                 </div>
@@ -39,6 +39,15 @@
                 <div class="card-body">
                     <h5 class="card-title">Bookings <i class="bi bi-calendar-check"></i></h5>
                     <p class="card-text">Total bookings:</p>
+                    <a href="#" class="btn btn-primary">Manage Bookings</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Services <i class="bi bi-calendar-check"></i></h5>
+                    <p class="card-text">Total services:</p>
                     <a href="#" class="btn btn-primary">Manage Bookings</a>
                 </div>
             </div>

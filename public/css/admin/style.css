@@ -186,6 +186,10 @@
         background: #f8f9fa;
     }
 }
+.user-form{
+    border: 1px solid rgb(201, 199, 199);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); 
+}
 
 @media (max-width: 768px) {
 
@@ -282,8 +286,28 @@
     }
 }
 
-.card .btn-primary {
-    background-color: rgb(16, 16, 138);
+.card .btn_about {
+    background-color: rgb(17, 17, 158);
+    color: #fff;
+
+}
+
+.card .btn_about:hover {
+    background-color: rgb(10, 10, 94);
+    color: #fff;
+
+}
+
+.card .btn_add_service {
+    color: #fff;
+    background-color: rgb(181, 8, 216);
+
+}
+
+.card .btn_add_service:hover {
+    background-color: rgb(133, 10, 158);
+    color: #fff;
+
 }
 
 .overlay {
@@ -335,8 +359,9 @@
     border-radius: 5px;
 
 }
-.description{
-    font-size:20px;
+
+.description {
+    font-size: 20px;
 }
 
 .carousel-control-prev-icon,
@@ -347,16 +372,21 @@
     background-size: 100%, 100%;
     border-radius: 50%;
 }
+
 .review-text {
     font-size: 1.2rem;
     text-align: center;
-    margin-left: 40px; 
-    margin-right: 40px; 
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
-.address{
+.address {
     font-size: 23px;
 }
-.address .bi{
-    color:rgb(2, 2, 180);
+
+.address .bi {
+    color: rgb(2, 2, 180);
+}
+#add-room-form{
+    font-size:19px;
 }

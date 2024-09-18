@@ -31,7 +31,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('', [AdminPageController::class, 'accommodation'])->name('index');
             Route::get('create', [AdminPageController::class, 'createAccommodation'])->name('create');
             Route::post('store', [AccommodationController::class, 'store'])->name('store');
-            Route::get('{accommodation}',[AdminPageController::class,'showAccommodation'])->name('show');
+            Route::get('{accommodation}', [AdminPageController::class, 'showAccommodation'])->name('show');
+        }
+    );
+    Route::prefix('rooms')->name('rooms.')->group(
+        function () {
+            Route::get('create/{accommodation}',[AdminPageController::class, 'createRoom'])->name('create');
+            
         }
     );
 });

@@ -11,8 +11,13 @@ class Accommodation extends Model
     protected $table = 'accommodation';
 
     protected $fillable = ['name', 'description', 'address', 'main_photo', 'type', 'city', 'country'];
-    
-    public function photos(){
-        return $this->hasMany(Photo::class,'accommodation_id','id');
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'accommodation_id', 'id');
+    }
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
     }
 }

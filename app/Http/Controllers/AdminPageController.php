@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AccommodationType;
+use App\Enums\RoomType;
 use App\Http\Controllers\Controller;
 use App\Models\Accommodation;
 use App\Models\User;
@@ -26,14 +27,24 @@ class AdminPageController extends Controller
 
         return view('admin.accommodation.create', compact('accommodationTypes'));
     }
-    public function accommodation(){
-        $accommodation = Accommodation::paginate(6);
-        return view('admin.accommodation.index',['accommodation'=>$accommodation]);
+    public function createRoom(Accommodation $accommodation)
+    {
+        if (in_array($accommodation->type, AccommodationType::roomSupportedTypes())) {
+            $roomTypes = RoomType::cases();
+            return view('admin.rooms.create', ["roomTypes"=>$roomTypes,"accommodation"=>$accommodation]);
+        }
+        return redirect()->back()->with('error', 'Rooms cannot be created for this type of accommodation');
     }
-    public function showAccommodation(Accommodation $accommodation){
+    public function accommodation()
+    {
+        $accommodation = Accommodation::paginate(6);
+        return view('admin.accommodation.index', ['accommodation' => $accommodation]);
+    }
+    public function showAccommodation(Accommodation $accommodation)
+    {
 
         $accommodation->load('photos');
 
-        return view('admin.accommodation.show',compact('accommodation'));
+        return view('admin.accommodation.show', compact('accommodation'));
     }
 }
