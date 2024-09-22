@@ -36,8 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (cropper) {
                 cropper.destroy();
             }
+            var aspectRatio = cropWidth / cropHeight;
+
             cropper = new Cropper(cropImage, {
-                aspectRatio: 1,
+                aspectRatio: aspectRatio,
                 viewMode: 1,
                 autoCropArea: 1,
                 responsive: true,
@@ -69,10 +71,12 @@ document.addEventListener('DOMContentLoaded', function () {
             imageInput.files = dataTransfer.files;
 
             preview.src = canvas.toDataURL();
+
             preview.style.display = 'block';
+
             cropperModal.hide();
         }, 'image/jpeg');
-    }); e
+    });
     document.getElementById('cropper-modal').addEventListener('show.bs.modal', function () {
         if (cropper) {
             var canvas = cropper.getCroppedCanvas({
@@ -84,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 var url = URL.createObjectURL(blob);
                 preview.src = url;
                 preview.style.display = 'block';
+                preview.style.width = cropWidth / 2 + 'px';
+                preview.style.height = cropHeight / 2 + 'px';
             });
         }
     });
@@ -100,7 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'post':
                 cropHeight = 400;
                 cropWidth = 300;
-
+                break;
+            case 'room':
+                cropHeight = 300;
+                cropWidth = 400;
+                break;
         }
     }
 });

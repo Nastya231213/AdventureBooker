@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('accommodation_id')->constrained('accommodation')->onDelete('cascade');
-            $table->enum('type',RoomType::getValues());
+            $table->enum('type',RoomType::cases());
             $table->integer('capacity');
             $table->decimal('price', 8, 2);
             $table->timestamps();

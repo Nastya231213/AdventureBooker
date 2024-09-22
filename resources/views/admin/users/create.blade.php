@@ -121,5 +121,7 @@
     </div>
 </div>
 <script src="{{asset('js/admin/cropper.js')}}"></script>
+<script src="{{asset('js/admin/form-validation.js')}}"></script>
+
 <script src="{{asset('js/admin/add-user.js')}}"></script>
 @endsection

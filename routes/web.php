@@ -4,6 +4,7 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('rooms')->name('rooms.')->group(
         function () {
             Route::get('create/{accommodation}',[AdminPageController::class, 'createRoom'])->name('create');
-            
+            Route::post('store',[RoomController::class, 'store'])->name('store');
+
         }
     );
 });
