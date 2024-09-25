@@ -50,10 +50,10 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-3 d-flex flex-column">
-                <div class="card_review mb-3">
+                <div class="card_review mb-1">
                     <div class="guest_rating">
                         <div class="d-flex flex-column align-items-end ">
-                            <h3>Excellentsfs!</h3>
+                            <h4>Excellentsfs!</h4>
                             <p class="quantity_reviews">15 3543 reviews</p>
 
                         </div>
@@ -103,15 +103,45 @@
                 </div>
 
             </div>
-          
-
         </div>
-        <h3> The most popular amenities and services</h3>
-        <div class="row">
+        <h3 class="mt-3"> The most popular amenities and services</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Type of the room</th>
+                    <th scope="col">Quantity of the guests </th>
+                    <th scope="col">Price</th>
+                    <th class="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($accommodation->rooms as $room)
+                <tr>
+                    <td>{{ $room->id }}</td>
+                    <td><img src="{{asset('/storage/'.$room->room_photo)}}" width="200"></td>
+                    <td>{{$room->type}}</td>
+                    <td>
+                        <div class="quantity_of_guests">
+                            @if($room->capacity<=3)
+                                @for($i=0;$i<$room->capacity;$i++)
+                                <i class="bi bi-person-fill "></i>
+                                @endfor
+                                @else
+                                <i class="bi bi-person-fill "></i>x{{$room->capacity}}
+                                @endif
 
-        </div>
 
+                        </div>
 
+                    </td>
+                    <td>{{$room->price}} $</td>
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
     </div>
 
 

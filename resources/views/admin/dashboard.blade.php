@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Accommodation <i class="bi bi-building"></i></h5>
                     <p class="card-text">Total hotels:</p>
-                    <a href="#" class="btn btn-primary">Manage Hotels</a>
+                    <a href="{{route('admin.accommodation.index')}}" class="btn btn-primary">Manage Hotels</a>
                 </div>
             </div>
         </div>

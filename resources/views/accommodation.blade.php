@@ -3,7 +3,7 @@
 @section('content')
 
 @include('flash-message')
-<div class=" bg-image" style="background-image: url('{{ asset('images/hotel.webp') }}');">
+<div class=" bg-image" style="background-image: url('{{ asset('images/photo-lions-castle-hotel-lviv-3.jfif') }}');">
     <div id="search-accommodation">
         <div class="booking-section">
             <div>

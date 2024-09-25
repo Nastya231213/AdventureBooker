@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('add-hotel-form').addEventListener('submit', function (event) {
         event.preventDefault();
         const formData = new FormData(this);
-        var url = '/admin/accommodations/store';
+        var url = '/admin/accommodation/store';
         fetch(url, {
             method: 'POST',
             body: formData,

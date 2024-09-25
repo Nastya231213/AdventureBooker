@@ -37,7 +37,7 @@ class AdminPageController extends Controller
     }
     public function accommodation()
     {
-        $accommodation = Accommodation::paginate(6);
+        $accommodation = Accommodation::with('rooms')->paginate(6);
         return view('admin.accommodation.index', ['accommodation' => $accommodation]);
     }
     public function showAccommodation(Accommodation $accommodation)

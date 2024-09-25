@@ -117,7 +117,7 @@
                     document.getElementById('add-room-form').reset();
                     const successMessageDiv = document.getElementById('successMessage');
                     const textElement = successMessageDiv.querySelector('.text');
-                    document.querySelector('#successMessage .text').textContent =data.message;
+                    document.querySelector('#successMessage .text').textContent = data.message;
                     successMessageDiv.classList.remove('hide');
                     successMessageDiv.classList.add('show');
                 }

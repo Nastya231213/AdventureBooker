@@ -16,7 +16,6 @@ class AccommodationController extends Controller
             'address' => 'required|string',
             'main_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'country' => 'required|string|max:255',
-            'photos' => 'required|array|min:4',
             'photos.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'city' => 'required|string|max:255',
             'type' => 'required|string',

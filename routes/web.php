@@ -38,6 +38,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('rooms')->name('rooms.')->group(
         function () {
             Route::get('create/{accommodation}',[AdminPageController::class, 'createRoom'])->name('create');
+                        Route::get('create/{accommodation}',[AdminPageController::class, 'createRoom'])->name('create');
+
             Route::post('store',[RoomController::class, 'store'])->name('store');
 
         }

@@ -14,7 +14,7 @@ class RoomController extends Controller
 
         $validatedData = $request->validate(
             [
-                'type' => ['required', 'string','in:' . implode(',', RoomType::getValues())],
+                'type' => ['required', 'string', 'in:' . implode(',', RoomType::getValues())],
                 'price' => 'required|integer',
                 'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'capacity' => 'required|integer',
@@ -24,9 +24,9 @@ class RoomController extends Controller
         );
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('rooms/', 'public');
+            $photoPath = $request->file('photo')->store('rooms', 'public');
         }
-       
+
         $newRoom = Room::create(
             [
                 'type' => $validatedData['type'],
