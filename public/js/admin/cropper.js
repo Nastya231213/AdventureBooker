@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cropHeight = 300;
                 cropWidth = 400;
                 break;
+    
         }
     }
 });

@@ -61,6 +61,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Amenities <i class="bi bi-tools"></i></h5>
+                    <p class="card-text">Total amenities: </p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

@@ -31,7 +31,7 @@ class AdminPageController extends Controller
     {
         if (in_array($accommodation->type, AccommodationType::roomSupportedTypes())) {
             $roomTypes = RoomType::cases();
-            return view('admin.rooms.create', ["roomTypes"=>$roomTypes,"accommodation"=>$accommodation]);
+            return view('admin.rooms.create', ["roomTypes" => $roomTypes, "accommodation" => $accommodation]);
         }
         return redirect()->back()->with('error', 'Rooms cannot be created for this type of accommodation');
     }
@@ -46,5 +46,10 @@ class AdminPageController extends Controller
         $accommodation->load('photos');
 
         return view('admin.accommodation.show', compact('accommodation'));
+    }
+    public function createAmenity(){
+        
+        return view('admin.amenities.create');
+
     }
 }
