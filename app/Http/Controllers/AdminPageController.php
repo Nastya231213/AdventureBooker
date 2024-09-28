@@ -6,6 +6,7 @@ use App\Enums\AccommodationType;
 use App\Enums\RoomType;
 use App\Http\Controllers\Controller;
 use App\Models\Accommodation;
+use App\Models\Amenity;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,12 @@ class AdminPageController extends Controller
         $accommodation = Accommodation::with('rooms')->paginate(6);
         return view('admin.accommodation.index', ['accommodation' => $accommodation]);
     }
+    public function amenities()
+    {
+        
+        $amenities = Amenity::paginate(5);
+        return view('admin.amenities.index', compact('amenities'));
+    }
     public function showAccommodation(Accommodation $accommodation)
     {
 
@@ -47,9 +54,9 @@ class AdminPageController extends Controller
 
         return view('admin.accommodation.show', compact('accommodation'));
     }
-    public function createAmenity(){
-        
-        return view('admin.amenities.create');
+    public function createAmenity()
+    {
 
+        return view('admin.amenities.create');
     }
 }

@@ -8,10 +8,9 @@
 </div>
 <div class="main-content" id="mainContent">
 
-    <a href="{{route('admin.users.index')}}" class="btn btn-primary">
-        <i class="bi bi-arrow-left"></i> All Hotel
+    <a href="{{route('admin.amenities.index')}}" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> All Amenity
     </a>
-
     <form id="add-amenity-form" enctype="multipart/form-data" class="mx-auto border rounded p-4 user-form">
         @csrf
         <h3 class="my-4 text-center">Add Amenity</h3>
@@ -27,12 +26,12 @@
 
 
         <div class="row mb-3">
-            <label for="photo" class="col-3 col-form-label">Icon</label>
+            <label for="icon" class="col-3 col-form-label">Icon</label>
             <div class="col-sm-12 col-lg-9">
-                <input type="file" class="form-control" id="photo" data-image-type="icon" name="photo" accept="image/*">
-                <div class="error-message" id="error-photo"></div>
+                <input type="file" class="form-control" id="icon" name="icon" accept="image/*">
+                <div class="error-message" id="error-icon"></div>
                 <div class="mt-2">
-                    <img id="photo_preview" src="" width="50" height="50" alt="Image preview" style="display:none;">
+                    <img id="icon_preview" src="" width="50" height="50" alt="Image preview" style="display:none;">
                 </div>
             </div>
         </div>
@@ -75,15 +74,23 @@
                     }
                 }
 
+            ).then(
+                data => {
+                    if (data && data.success) {
+                        document.getElementById('add-amenity-form').reset();
+                        const successMessageDiv = document.getElementById('successMessage');
+                        const textElement = successMessageDiv.querySelector('.text');
+                        document.querySelector('#successMessage .text').textContent =data.message;
+                        successMessageDiv.classList.remove('hide');
+                        successMessageDiv.classList.add('show');
+                        document.getElementById('main-photo-preview').innerHTML = '';
+                        document.getElementById('gallery').innerHTML = '';
+                    }
+                }
             );
-        }).then(
-            data=>{
-                
-            }
-        )
-        ;
-        var imageInput = document.getElementById('photo');
-        var preview = document.getElementById('photo_preview');
+        });
+        var imageInput = document.getElementById('icon');
+        var preview = document.getElementById('icon_preview');
         imageInput.addEventListener('change', function(event) {
             var files = event.target.files;
             if (files.length === 0) return;

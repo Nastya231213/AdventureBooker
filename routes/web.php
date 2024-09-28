@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoomController;
@@ -39,14 +40,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         function () {
             Route::get('create/{accommodation}', [AdminPageController::class, 'createRoom'])->name('create');
             Route::get('create/{accommodation}', [AdminPageController::class, 'createRoom'])->name('create');
-
             Route::post('store', [RoomController::class, 'store'])->name('store');
         }
     );
-    Route::prefix('amenities')->name('amenity.')->group(
+    Route::prefix('amenities')->name('amenities.')->group(
         function () {
-            Route::get('create',[AdminPageController::class,'createAmenity'])->name('create');
-        
+            Route::get('', [AdminPageController::class, 'amenities'])->name('index');
+            Route::get('create', [AdminPageController::class, 'createAmenity'])->name('create');
+            Route::post('store', [AmenityController::class, 'store'])->name('store');
+            Route::delete('{amenity_id}', [AmenityController::class, 'delete'])->name('delete');
         }
     );
 });

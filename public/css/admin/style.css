@@ -411,3 +411,8 @@
     display: flex;
     font-size: 18px;
 }
+
+.photo_amenity{
+    width: 47px!important;; 
+    height: 47px!important;
+}

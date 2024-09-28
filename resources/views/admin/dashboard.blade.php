@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Amenities <i class="bi bi-tools"></i></h5>
                     <p class="card-text">Total amenities: </p>
-                    <a href="#" class="btn btn-primary">View Details</a>
+                    <a href="{{route('admin.amenities.index')}}" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>
