@@ -25,7 +25,6 @@
                         <th scope="col">Name</th>
                         <th scope="col">Icon</th>
                         <th scope="col">Actions</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +35,7 @@
                         <td>{{$amenity->name}}</td>
                         <td><img src="{{ asset('storage/'.$amenity->icon) }}" class="photo_amenity" alt=""></td>
                         <td>
-                            <a href="#" class="btn btn-primary mt-1"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a href="{{ route('admin.amenities.edit', $amenity->id) }}"  class="btn btn-primary mt-1"><i class="bi bi-pencil-square"></i> Edit</a>
                             <a href="#" class="btn btn-danger delete-button mt-1" data-id="{{$amenity->id}}"> <i class="bi bi-x-circle-fill"></i> Delete </a>
                         </td>
                     </tr>

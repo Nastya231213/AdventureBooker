@@ -22,6 +22,11 @@ class AdminPageController extends Controller
         $user = User::find($user_id);
         return view('admin.users.edit', ['user' => $user]);
     }
+    public function editAmenity($amenity_id)
+    {
+        $amenity = Amenity::find($amenity_id);
+        return view('admin.amenities.edit',compact('amenity'));
+    }
     public function createAccommodation()
     {
         $accommodationTypes = AccommodationType::cases();
@@ -43,7 +48,7 @@ class AdminPageController extends Controller
     }
     public function amenities()
     {
-        
+
         $amenities = Amenity::paginate(5);
         return view('admin.amenities.index', compact('amenities'));
     }
@@ -60,3 +65,4 @@ class AdminPageController extends Controller
         return view('admin.amenities.create');
     }
 }
+     

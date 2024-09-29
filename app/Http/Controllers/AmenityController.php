@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Amenity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AmenityController extends Controller
 {
@@ -52,5 +53,33 @@ class AmenityController extends Controller
         return response()->json([
             'message' => 'Amenity deleted successfully.'
         ], 200);
+    }
+    public function update(Request $request, Amenity $amenity)
+    {
+        $request->validate(
+            [
+                'name' => 'required|string|max:255'
+
+            ]
+        );
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('amenities/icon', 'public');
+            if ($amenity->icon && Storage::disk('public')->exists('amenities/icon', $amenity->icon)) {
+                Storage::disk('public')->delete('amenities/icon', $amenity->icon);
+            }
+            $amenity->icon = $iconPath;
+        }
+        $amenity->name = $request->input('name');
+        $amenity->save();
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Amenity created successfully!',
+                'icon_path'=>$amenity->icon
+            
+            ],
+            200
+        );
     }
 }

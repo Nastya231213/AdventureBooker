@@ -49,9 +49,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('create', [AdminPageController::class, 'createAmenity'])->name('create');
             Route::post('store', [AmenityController::class, 'store'])->name('store');
             Route::delete('{amenity_id}', [AmenityController::class, 'delete'])->name('delete');
+            Route::get('{amenity_id}/edit', [AdminPageController::class, 'editAmenity'])->name('edit');
         }
     );
 });
 Route::put('admin/users/{user}', [UserController::class, 'update'])->name('update');
+Route::put('admin/amenities/{amenity}', [AmenityController::class, 'update'])->name('update');
 
 Route::post('admin/users/store', [UserController::class, 'store'])->name('admin.users.store');
