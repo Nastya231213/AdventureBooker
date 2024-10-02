@@ -1,11 +1,18 @@
 @extends('layouts.admin.admin_main')
 @section('title', 'Add Hotel')
 @section('content')
-<div id="successMessage" class="message hide">
+<div id="successMessage" class="message success hide">
     <span class="fas fa-check-circle"></span>
     <span class="text"></span>
     <span class="close-btn"><span class="fas fa-times"></span></span>
 </div>
+
+<div id="errorMessage" class="message error hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="text">sdfssssss</span>
+    <span class="close-btn"><span class="fas fa-times"></span></span>
+</div>
+
 <div class="main-content" id="mainContent">
 
     <a href="{{route('admin.users.index')}}" class="btn btn-primary">

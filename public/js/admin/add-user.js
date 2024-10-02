@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (errorData.errors) {
                         $allErrorDiv = document.querySelectorAll('.error-message');
                         displayValidationErrors(errorData.errors);
+                        
                     }
                 });
             } else {

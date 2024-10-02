@@ -14,7 +14,15 @@ class AdminPageController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+
+
+        $amenitiesCount = Amenity::count();
+        $accommodtionCount = Accommodation::count();
+
+        return view('admin.dashboard', [
+            'amenitiesCount' => $amenitiesCount,
+            'accomodationCount' => $accommodtionCount
+        ]);
     }
     public function editUser($user_id)
     {
@@ -25,7 +33,7 @@ class AdminPageController extends Controller
     public function editAmenity($amenity_id)
     {
         $amenity = Amenity::find($amenity_id);
-        return view('admin.amenities.edit',compact('amenity'));
+        return view('admin.amenities.edit', compact('amenity'));
     }
     public function createAccommodation()
     {
@@ -64,5 +72,11 @@ class AdminPageController extends Controller
 
         return view('admin.amenities.create');
     }
+    public function addAmenity(Accommodation $accommodation)
+    {
+
+        $amenities = Amenity::get();
+
+        return view('admin.amenities.add-amenity', ['amenities' => $amenities,'accommodation'=>$accommodation]);
+    }
 }
-     

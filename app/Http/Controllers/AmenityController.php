@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Accommodation;
 use App\Models\Amenity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -76,8 +77,42 @@ class AmenityController extends Controller
             [
                 'success' => true,
                 'message' => 'Amenity created successfully!',
-                'icon_path'=>$amenity->icon
-            
+                'icon_path' => $amenity->icon
+
+            ],
+            200
+        );
+    }
+    public function storeAmenityToAccommodation(Request $request, $accommodation_id)
+    {
+
+        $validatedData = $request->validate(
+            [
+                'amenity' => 'required|string|max:255'
+            ]
+        );
+
+        $amenity = Amenity::where('id', $validatedData['amenity'])->first();
+        if (!$amenity) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Amenity does not exist'
+                ],
+                404
+            );
+        }
+        $accommodation = Accommodation::findOrFail($accommodation_id);
+
+        $accommodation->amenities()->attach($amenity->id, [
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Amenity created successfully!',
             ],
             200
         );

@@ -49,7 +49,6 @@ class AccommodationController extends Controller
 
             );
         }
-
         return response()->json([
             'success' => true,
         ], 201);

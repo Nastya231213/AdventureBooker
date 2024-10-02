@@ -13,15 +13,17 @@
                 <h5 class="card-title">{{ $item->name}}</h5>
                 <p class="card-text">{{Str::limit( $item->description,100)}}</p>
                 <div class="buttons  ">
-                    <a href="{{route('admin.accommodation.show',$item->id)}}" class="btn btn_about mx-2 mt-2">About</a>
-                    <a href="#" class="btn btn_add_service mx-2 mt-2">Add Service</a>
-                    <a href="{{route('admin.rooms.create',$item->id)}}" class="btn btn-success mx-2 mt-2">Add Room</a>
+                    <a href="{{route('admin.accommodation.show',$item->id)}}" class="btn btn_about mx-1 mt-2">About <i class="bi bi-info-circle"></i></a>
+                    <a href="{{route('admin.amenities.add',$item->id)}}" class="btn btn_add_service mx-1 mt-2">Add Service <i class="bi bi-cone-striped"></i></a>
+                    <a href="{{route('admin.rooms.create',$item->id)}}" class="btn btn-success mx-1 mt-2">Add Room <i class="bi bi-door-closed"></i>
+                    </a>
 
                 </div>
             </div>
         </div>
         @endforeach
         <div class="mt-4 p-4">
+            
             {{$accommodation->links('pagination::bootstrap-5')}}
         </div>
     </div>

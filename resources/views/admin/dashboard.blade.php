@@ -19,7 +19,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Accommodation <i class="bi bi-building"></i></h5>
-                    <p class="card-text">Total hotels:</p>
+                    <p class="card-text">Total places to stay :</p>
                     <a href="{{route('admin.accommodation.index')}}" class="btn btn-primary">Manage Hotels</a>
                 </div>
             </div>
@@ -65,7 +65,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Amenities <i class="bi bi-tools"></i></h5>
-                    <p class="card-text">Total amenities: </p>
+                    <p class="card-text">Total amenities: {{$amenitiesCount}}</p>
                     <a href="{{route('admin.amenities.index')}}" class="btn btn-primary">View Details</a>
                 </div>
             </div>

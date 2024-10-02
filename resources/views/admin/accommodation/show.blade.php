@@ -3,6 +3,10 @@
 @section('content')
 <div class="main-content" id="mainContent">
 
+
+    <a href="{{route('admin.accommodation.index',$accommodation->id)}}" class="btn btn-primary mb-3">
+        <i class="bi bi-arrow-left"></i> All the accommodation
+    </a>
     <div class="container">
         <div class="rating">
 
