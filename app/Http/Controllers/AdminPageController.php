@@ -63,7 +63,7 @@ class AdminPageController extends Controller
     public function showAccommodation(Accommodation $accommodation)
     {
 
-        $accommodation->load('photos');
+        $accommodation->load(['photos','amenities']);
 
         return view('admin.accommodation.show', compact('accommodation'));
     }
@@ -74,8 +74,10 @@ class AdminPageController extends Controller
     }
     public function addAmenity(Accommodation $accommodation)
     {
+        $existingAmenityIds=$accommodation->amenities->pluck('id')->toArray();
 
-        $amenities = Amenity::get();
+
+        $amenities = Amenity::whereNotIn('id',$existingAmenityIds)->get();
 
         return view('admin.amenities.add-amenity', ['amenities' => $amenities,'accommodation'=>$accommodation]);
     }

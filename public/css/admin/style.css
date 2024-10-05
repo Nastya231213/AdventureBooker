@@ -409,10 +409,25 @@
 
 .quantity_of_guests {
     display: flex;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .photo_amenity{
     width: 47px!important;; 
     height: 47px!important;
+}
+#amenities{
+    display:flex;
+    gap:50px;
+    flex-wrap:wrap;
+    font-size:19px;
+}
+#amenities .amenity{
+    display:flex;
+    gap:3px;
+
+}
+.amenity img {
+    width: 30px !important;
+    height: 30px !important;
 }

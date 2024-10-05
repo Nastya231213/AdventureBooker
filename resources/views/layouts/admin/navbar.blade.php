@@ -8,7 +8,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item d-flex  align-items-center">
                     <i class="bi bi-speedometer2"></i>
-                    <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="#">Dashboard</a>
+                    <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{route('admin.dashboard')}}">Dashboard</a>
                 </li>
                 <li class="nav-item d-flex  align-items-center">
                     <i class="bi bi-person-fill"></i>

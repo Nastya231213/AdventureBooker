@@ -95,7 +95,7 @@ class AmenityController extends Controller
         $amenity = Amenity::where('id', $validatedData['amenity'])->first();
         if (!$amenity) {
             return response()->json(
-                [
+                [     
                     'success' => false,
                     'message' => 'Amenity does not exist'
                 ],

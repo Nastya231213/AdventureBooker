@@ -109,6 +109,17 @@
             </div>
         </div>
         <h3 class="mt-3"> The most popular amenities and services</h3>
+        <div id="amenities">
+            @foreach($accommodation->amenities as $amenity)
+            <div class="amenity">
+                {{$amenity->name}}
+                <img  src="{{asset('/storage/'.$amenity->icon)}}">
+
+            </div>
+            @endforeach
+
+        </div>
+        <h3 class="mt-3"> Availability</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -136,7 +147,6 @@
                                 <i class="bi bi-person-fill "></i>x{{$room->capacity}}
                                 @endif
 
-
                         </div>
 
                     </td>
@@ -146,6 +156,7 @@
             </tbody>
 
         </table>
+
     </div>
 
 
