@@ -34,6 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('create', [AdminPageController::class, 'createAccommodation'])->name('create');
             Route::post('store', [AccommodationController::class, 'store'])->name('store');
             Route::get('{accommodation}', [AdminPageController::class, 'showAccommodation'])->name('show');
+            Route::get('edit/{accommodation_id}', [AdminPageController::class, 'editAccommodation'])->name('edit');
         }
     );
     Route::prefix('rooms')->name('rooms.')->group(
@@ -50,7 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('{amenity_id}', [AmenityController::class, 'delete'])->name('delete');
             Route::get('{amenity_id}/edit', [AdminPageController::class, 'editAmenity'])->name('edit');
             Route::get('{accommodation}', [AdminPageController::class, 'addAmenity'])->name('add');
-            Route::post('{accommdation}/store',[AmenityController::class,'storeAmenityToAccommodation'])->name('accommodation.addAmenity');
+            Route::post('{accommdation}/store', [AmenityController::class, 'storeAmenityToAccommodation'])->name('accommodation.addAmenity');
         }
     );
 });

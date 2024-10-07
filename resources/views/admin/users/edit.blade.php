@@ -67,7 +67,7 @@
             <label for="password" class="col-sm-3 col-form-label">Confirm password</label>
             <div class="col-md-12 col-lg-9">
                 <input type="password" class="form-control" name="password_confirmation">
-             
+
             </div>
 
         </div>
@@ -166,7 +166,7 @@
                     console.error('Error:', error);
                 });
         });
-        
+
         function clearErrors() {
             var allErrorDiv = document.querySelectorAll('.error-message');
             allErrorDiv.forEach(element => {

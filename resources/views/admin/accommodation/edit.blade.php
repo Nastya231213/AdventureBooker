@@ -9,7 +9,7 @@
 
 <div id="errorMessage" class="message error hide">
     <span class="fas fa-exclamation-circle"></span>
-    <span class="text">sdfssssss</span>
+    <span class="text"></span>
     <span class="close-btn"><span class="fas fa-times"></span></span>
 </div>
 
@@ -21,12 +21,12 @@
 
     <form id="add-hotel-form" enctype="multipart/form-data" class="mx-auto border rounded p-4 user-form">
         @csrf
-        <h3 class="my-4 text-center">Add Accommodation</h3>
+        <h3 class="my-4 text-center">Edit Accommodation</h3>
 
         <div class="row mb-3">
             <label for="name" class="col-3 col-form-label">Name</label>
             <div class="col-sm-12 col-lg-9">
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" value="{{$accommodation->name}}">
                 <div class="error-message" id="error-name">
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <div class="row mb-3">
             <label for="description" class="col-3 col-form-label">Description</label>
             <div class="col-md-12 col-lg-9">
-                <textarea class="form-control" name="description" rows="4"></textarea>
+                <textarea class="form-control" name="description" rows="4">{{ $accommodation->description }}</textarea>
                 <div class="error-message" id="error-description">
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <div class="row mb-3">
             <label for="email" class="col-3  col-form-label">Address</label>
             <div class="col-md-12 col-lg-9">
-                <textarea class="form-control" name="address" rows="3"></textarea>
+                <textarea class="form-control" name="address" rows="3">{{$accommodation->address}}</textarea>
                 <div class="error-message" id="error-address">
                 </div>
             </div>
@@ -54,9 +54,11 @@
 
             <div class="col-md-12 col-lg-9">
                 <select class="form-select form-select-md mb-3" name="type" aria-label=".form-select-lg example">
-                    <option selected>Open this select menu</option>
                     @foreach($accommodationTypes as $type)
-                    <option value="{{$type->value}}">{{ucfirst($type->value)}}</option>
+                    <option value="{{$type->value}}" {{$type==$accommodation->type ?'selected':''}}>
+                        {{ucfirst($type->value)}}
+
+                    </option>
                     @endforeach
                 </select>
                 <div class="error-message" id="error-type">
@@ -85,7 +87,7 @@
         <div class="row mb-3">
             <label for="city" class="col-3 col-form-label">Country</label>
             <div class="col-sm-12 col-lg-9">
-                <input type="text" class="form-control" id="country" name="country">
+                <input type="text" class="form-control" value="{{$accommodation->country}}" id="country" name="country">
                 <div class="error-message" id="error-country">
                 </div>
             </div>
@@ -93,19 +95,79 @@
         <div class="row mb-3">
             <label for="city" class="col-3 col-form-label">City</label>
             <div class="col-sm-12 col-lg-9">
-                <input type="text" class="form-control" id="city" name="city">
+                <input type="text" class="form-control" id="city" value="{{$accommodation->city}}" name="city">
                 <div class="error-message" id="error-city">
                 </div>
             </div>
         </div>
         <div class="row mb-3">
             <div class="mx-auto col-sm-6">
-                <button type="submit" id="add-user-button" class="btn btn-primary w-100">Add Hotel</button>
+                <button type="submit" id="edit-user-button" class="btn btn-primary w-100">Edit Hotel</button>
             </div>
         </div>
     </form>
 </div>
 
 </div>
-<script src="{{asset('js/admin/add-accommodation.js')}}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('edit-accommodation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                description: document.getElementById('description').value,
+                address: document.getElementById('address').value,
+                type: document.getElementById('type').value,
+                main_photo: document.getElementById('main_photo').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                _method: 'PUT'
+
+            };
+            const photosInput = document.getElementById('photos');
+            if (photosInput.files.length > 0) {
+                for (let i = 0; i < photosInput.files.length; i++) {
+                    formData.append('photos[]', photosInput.files[i]);
+                }
+            }
+            fetch('/admin/accommodation/{{$accommodation->id}}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(formData)
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+
+                }
+
+                return response.json();
+            }).then(data => {
+                const successMessageDiv = document.getElementById('successMessage');
+                const textElement = successMessageDiv.querySelectors('.text');
+                textElement.textContent = data.message;
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        function clearErrors() {
+            var allErrorDiv = document.querySelectorAll('.error-message');
+            allErrorDiv.forEach(element => {
+                element.textContent = '';
+            });
+        }
+
+        function displayValidationErrors(errors) {
+            for (let field in errors) {
+                let errorDiv = document.getElementById(`error-${field}`);
+                if (errorDiv) {
+                    errorDiv.textContent = errors[field][0];
+                }
+            }
+        }
+    });
+</script>
 @endsection

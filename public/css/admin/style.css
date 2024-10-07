@@ -412,22 +412,49 @@
     font-size: 17px;
 }
 
-.photo_amenity{
-    width: 47px!important;; 
-    height: 47px!important;
+.photo_amenity {
+    width: 47px !important;
+    ;
+    height: 47px !important;
 }
-#amenities{
-    display:flex;
-    gap:50px;
-    flex-wrap:wrap;
-    font-size:19px;
+
+#amenities {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    font-size: 19px;
 }
-#amenities .amenity{
-    display:flex;
-    gap:3px;
+
+#amenities .amenity {
+    display: flex;
+    gap: 3px;
 
 }
+
 .amenity img {
     width: 30px !important;
     height: 30px !important;
+}
+
+.edit-delete-buttons {
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+    gap: 5px;
+
+}
+
+.edit-delete-buttons .edit-btn {
+    background-color: #032dd3;
+
+    color: #fff;
+
+}
+
+.edit-delete-buttons .edit-btn:hover {
+    background-color: #0322a0;
+    ;
+
+    color: #fff;
+
 }

@@ -35,6 +35,12 @@ class AdminPageController extends Controller
         $amenity = Amenity::find($amenity_id);
         return view('admin.amenities.edit', compact('amenity'));
     }
+    public function editAccommodation($accommodation_id)
+    {
+        $accommodationTypes = AccommodationType::cases();
+        $accommodation = Accommodation::find($accommodation_id);
+        return view('admin.accommodation.edit',['accommodation'=>$accommodation,'accommodationTypes'=>$accommodationTypes]);
+    }
     public function createAccommodation()
     {
         $accommodationTypes = AccommodationType::cases();
@@ -63,7 +69,7 @@ class AdminPageController extends Controller
     public function showAccommodation(Accommodation $accommodation)
     {
 
-        $accommodation->load(['photos','amenities']);
+        $accommodation->load(['photos', 'amenities']);
 
         return view('admin.accommodation.show', compact('accommodation'));
     }
@@ -74,11 +80,11 @@ class AdminPageController extends Controller
     }
     public function addAmenity(Accommodation $accommodation)
     {
-        $existingAmenityIds=$accommodation->amenities->pluck('id')->toArray();
+        $existingAmenityIds = $accommodation->amenities->pluck('id')->toArray();
 
 
-        $amenities = Amenity::whereNotIn('id',$existingAmenityIds)->get();
+        $amenities = Amenity::whereNotIn('id', $existingAmenityIds)->get();
 
-        return view('admin.amenities.add-amenity', ['amenities' => $amenities,'accommodation'=>$accommodation]);
+        return view('admin.amenities.add-amenity', ['amenities' => $amenities, 'accommodation' => $accommodation]);
     }
 }
