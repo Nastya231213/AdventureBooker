@@ -35,6 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('store', [AccommodationController::class, 'store'])->name('store');
             Route::get('{accommodation}', [AdminPageController::class, 'showAccommodation'])->name('show');
             Route::get('edit/{accommodation_id}', [AdminPageController::class, 'editAccommodation'])->name('edit');
+            Route::put('update/{accommdation_id}',[AccommodationController::class,'update'])->name('update');
         }
     );
     Route::prefix('rooms')->name('rooms.')->group(
@@ -52,10 +53,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{amenity_id}/edit', [AdminPageController::class, 'editAmenity'])->name('edit');
             Route::get('{accommodation}', [AdminPageController::class, 'addAmenity'])->name('add');
             Route::post('{accommdation}/store', [AmenityController::class, 'storeAmenityToAccommodation'])->name('accommodation.addAmenity');
+            
         }
     );
 });
 Route::put('admin/users/{user}', [UserController::class, 'update'])->name('update');
 Route::put('admin/amenities/{amenity}', [AmenityController::class, 'update'])->name('update');
 
-Route::post('admin/users/store', [UserController::class, 'store'])->name('admin.users.store');
+Route::post('admin/users/store', [UserController::class, 'Кstore'])->name('admin.users.store');

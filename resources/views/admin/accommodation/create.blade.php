@@ -102,6 +102,7 @@
             <div class="mx-auto col-sm-6">
                 <button type="submit" id="add-user-button" class="btn btn-primary w-100">Add Hotel</button>
             </div>
+            
         </div>
     </form>
 </div>
