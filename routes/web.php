@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{accommodation}', [AdminPageController::class, 'showAccommodation'])->name('show');
             Route::get('edit/{accommodation_id}', [AdminPageController::class, 'editAccommodation'])->name('edit');
             Route::put('update/{accommdation_id}',[AccommodationController::class,'update'])->name('update');
+            Route::delete('{accommodation_id}',[AccommodationController::class,'delete'])->name('delete');
         }
     );
     Route::prefix('rooms')->name('rooms.')->group(

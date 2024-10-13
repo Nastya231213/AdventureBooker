@@ -68,7 +68,7 @@ class AccommodationController extends Controller
         ]);
 
         try {
-            $mainPhotoPath = $accommodation->main_photo; 
+            $mainPhotoPath = $accommodation->main_photo;
 
             if ($request->hasFile('main_photo')) {
                 Storage::disk('public')->delete($accommodation->main_photo);
@@ -115,5 +115,17 @@ class AccommodationController extends Controller
                 500
             );
         }
+    }
+    public function delete($accommodation_id)
+    {
+        $accommodation = Accommodation::find($accommodation_id);
+
+        $accommodation->delete();
+        return response()->json(
+            [
+                'success' => false,
+                'message' => 'Accommodaiton was successfully deleted!'
+            ]
+        );
     }
 }

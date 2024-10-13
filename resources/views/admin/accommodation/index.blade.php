@@ -12,11 +12,8 @@
         <div class="card ">
             <div class="edit-delete-buttons">
                 <a href="{{ route('admin.accommodation.edit' , $item->id) }}" class="btn edit-btn"><i class="bi bi-pencil-square"></i></a>
-                <form action="#" method="POST" style="display:inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash3-fill"></i></button>
-                </form>
+
+                <a href="#" class="btn btn-danger delete-button" data-id="{{$item->id}}"><i class="bi bi-trash3-fill"></i></a>
             </div>
             <img class="card-img-top" src="{{ asset('storage/'.$item->main_photo) }}" alt="Card image cap">
             <div class="card-body ">
@@ -36,5 +33,38 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (!confirm('Are you sure you want to delete this accommodation')) {
+                        return false;
+                    }
+                    var accommodationId = this.getAttribute('data-id');
+                    var url = '/admin/accommodation/' + accommodationId;
 
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            alert('Accommodation successfully deleted!');
+                            this.closest('.card').remove();
+
+                        } else {
+                            alert('Failed to delete the user.');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                    })
+                })
+            }
+
+        )
+    })
+</script>
 @endsection
